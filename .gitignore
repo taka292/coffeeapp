@@ -1,0 +1,35 @@
+# Bundler
+/.bundle
+/vendor/bundle
+
+# Logs / temp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# PID files
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# DB / storage
+/storage/*
+!/storage/.keep
+
+# Credentials / env
+.env
+.env.*
+!/env.example
+
+# Node / frontend cache
+node_modules/
+yarn-error.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# master.key
+config/master.key
