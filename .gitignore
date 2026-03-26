@@ -21,6 +21,9 @@
 .env.*
 !/env.example
 
+# css/tailwind.css
+app/assets/builds/tailwind.css
+
 # Node / frontend cache
 node_modules/
 yarn-error.log
