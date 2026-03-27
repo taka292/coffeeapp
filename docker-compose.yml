@@ -23,6 +23,7 @@ services:
     depends_on:
       - db
     environment:
+      BUNDLE_DEPLOYMENT: "0"
       DATABASE_URL: postgres://postgres:postgres@db:5432/coffeeapp_development
       RAILS_ENV: development
       MAILER_SENDER: ${MAILER_SENDER}
