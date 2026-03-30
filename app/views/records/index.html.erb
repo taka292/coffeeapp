@@ -5,9 +5,9 @@
     <header class="sticky top-0 z-20 flex items-center justify-between bg-[#f6f1ec] px-5 pt-4 pb-2">
       <div class="h-11 w-11"></div>
       <h1 class="text-base font-bold">記録一覧</h1>
-      <button class="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-lg shadow-sm">
+      <%= link_to settings_path, class: "flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-lg shadow-sm" do %>
         ⚙️
-      </button>
+      <% end %>
     </header>
 
     <main class="flex-1 space-y-4 px-5 pt-2 pb-6">
@@ -116,14 +116,14 @@
     </main>
 
     <nav class="sticky bottom-0 z-20 flex h-16 items-center justify-around border-t border-black/10 bg-white shadow-[0_-4px_12px_rgba(0,0,0,0.02)]">
-      <div class="flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]">
+      <%= link_to root_path, class: "flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]" do %>
         <span class="text-lg">🏠</span>
         <span class="text-[10px] font-bold">ホーム</span>
-      </div>
-      <div class="flex flex-1 flex-col items-center justify-center gap-1 text-[#6b3f2b]">
+      <% end %>
+      <%= link_to records_path, class: "flex flex-1 flex-col items-center justify-center gap-1 text-[#6b3f2b]" do %>
         <span class="text-lg">📖</span>
         <span class="text-[10px] font-bold">記録一覧</span>
-      </div>
+      <% end %>
       <div class="relative -top-3 flex flex-1 items-center justify-center">
         <button class="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#6b3f2b] text-2xl text-white shadow-[0_4px_12px_rgba(107,63,43,0.3)]">
           +
@@ -133,10 +133,10 @@
         <span class="text-lg">📈</span>
         <span class="text-[10px] font-bold">データ</span>
       </div>
-      <div class="flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]">
+      <%= link_to settings_path, class: "flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]" do %>
         <span class="text-lg">👤</span>
         <span class="text-[10px] font-bold">設定</span>
-      </div>
+      <% end %>
     </nav>
   </div>
 </div>

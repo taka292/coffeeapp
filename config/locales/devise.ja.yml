@@ -1,0 +1,50 @@
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_in_with_name: "こんにちは、%{name}さん！"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "ログアウトしました。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      signed_up_but_inactive: "アカウント登録が完了しました。ただし、アカウントが有効化されていないため、ログインできません。"
+      signed_up_but_locked: "アカウント登録が完了しました。ただし、アカウントがロックされているため、ログインできません。"
+      signed_up_but_unconfirmed: "確認メールを送信しました。メール内のリンクをクリックしてアカウントを有効化してください。"
+      update_needs_confirmation: "アカウント情報を更新しました。新しいメールアドレスの確認が必要です。メールを確認してください。"
+      updated: "アカウント情報を更新しました。"
+      updated_but_not_signed_in: "アカウント情報を更新しました。パスワードが変更されたため、再度ログインしてください。"
+      destroyed: "アカウントを削除しました。ご利用ありがとうございました。"
+    passwords:
+      send_instructions: "パスワード再設定のメールを送信しました。"
+      send_paranoid_instructions: "メールアドレスが登録されている場合、パスワード再設定のメールが送信されます。"
+      updated: "パスワードを変更しました。"
+      updated_not_active: "パスワードを変更しました。"
+    confirmations:
+      confirmed: "メールアドレスの確認が完了しました。"
+      send_instructions: "確認メールを送信しました。メール内のリンクをクリックしてアカウントを有効化してください。"
+      send_paranoid_instructions: "メールアドレスが登録されている場合、確認メールが送信されます。"
+    failure:
+      already_authenticated: "すでにログインしています。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "もう一度失敗するとアカウントがロックされます。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "セションがタイムアウトしました。再度ログインしてください。"
+      unauthenticated: "ログインまたは登録が必要です。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+    mailer:
+      confirmation_instructions:
+        subject: "アカウント確認のお知らせ"
+      reset_password_instructions:
+        subject: "パスワード再設定のお知らせ"
+      unlock_instructions:
+        subject: "アカウントロック解除のお知らせ"
+      email_changed:
+        subject: "メールアドレス変更のお知らせ"
+      password_change:
+        subject: "パスワード変更のお知らせ"
+    errors:
+      messages:
+        not_saved:
+          one: "1件のエラーがあります。"
+          other: "%{count}件のエラーがあります。"

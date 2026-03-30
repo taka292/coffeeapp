@@ -1,0 +1,131 @@
+<% content_for :title, "会員登録" %>
+
+<div class="-mt-28 -mx-5 min-h-screen w-screen bg-[#f6f1ec] text-[#2e2a26]">
+  <div class="mx-auto flex min-h-screen w-full max-w-[375px] flex-col">
+    <%# ヘッダー %>
+    <header class="flex items-center px-5 pt-6 pb-4">
+      <%= link_to root_path, class: "flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#6b3f2b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      <% end %>
+    </header>
+
+    <%# メインコンテンツ %>
+    <main class="flex-1 px-5 pt-4 pb-6">
+      <%# 登録カード %>
+      <div class="rounded-xl border border-black/10 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <%# ヘッダー部分 %>
+        <div class="mb-6">
+          <h1 class="text-2xl font-bold text-[#2e2a26]">会員登録</h1>
+          <p class="mt-1 text-sm text-[#9a8f88]">アカウントを作成して、コーヒー記録を始めましょう</p>
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <%# ユーザー名 %>
+          <div class="mb-4">
+            <%= f.label :name, "ユーザー名", class: "mb-2 block text-sm font-bold text-[#2e2a26]" %>
+            <div class="relative">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#9a8f88]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <%= f.text_field :name,
+                  autofocus: true,
+                  placeholder: "コーヒー愛好家",
+                  class: "w-full rounded-lg border border-[#e6d6c8] bg-[#f6f1ec] py-3 pl-12 pr-4 text-sm text-[#2e2a26] placeholder-[#9a8f88] focus:border-[#6b3f2b] focus:outline-none focus:ring-1 focus:ring-[#6b3f2b]" %>
+            </div>
+          </div>
+
+          <%# メールアドレス %>
+          <div class="mb-4">
+            <%= f.label :email, "メールアドレス", class: "mb-2 block text-sm font-bold text-[#2e2a26]" %>
+            <div class="relative">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#9a8f88]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <%= f.email_field :email,
+                  autocomplete: "email",
+                  placeholder: "coffee@example.com",
+                  class: "w-full rounded-lg border border-[#e6d6c8] bg-[#f6f1ec] py-3 pl-12 pr-4 text-sm text-[#2e2a26] placeholder-[#9a8f88] focus:border-[#6b3f2b] focus:outline-none focus:ring-1 focus:ring-[#6b3f2b]" %>
+            </div>
+          </div>
+
+          <%# パスワード %>
+          <div class="mb-4">
+            <div class="mb-2 flex items-center justify-between">
+              <%= f.label :password, "パスワード", class: "block text-sm font-bold text-[#2e2a26]" %>
+              <span class="text-xs text-[#9a8f88]"><%= @minimum_password_length %>文字以上</span>
+            </div>
+            <div class="relative">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#9a8f88]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <%= f.password_field :password,
+                  autocomplete: "new-password",
+                  placeholder: "••••••••",
+                  class: "w-full rounded-lg border border-[#e6d6c8] bg-[#f6f1ec] py-3 pl-12 pr-12 text-sm text-[#2e2a26] placeholder-[#9a8f88] focus:border-[#6b3f2b] focus:outline-none focus:ring-1 focus:ring-[#6b3f2b]" %>
+              <button type="button" onclick="togglePasswordVisibility(this)" class="absolute inset-y-0 right-0 flex items-center pr-4 text-[#9a8f88] hover:text-[#6b3f2b]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <%# パスワード確認 %>
+          <div class="mb-6">
+            <%= f.label :password_confirmation, "パスワード（確認）", class: "mb-2 block text-sm font-bold text-[#2e2a26]" %>
+            <div class="relative">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#9a8f88]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <%= f.password_field :password_confirmation,
+                  autocomplete: "new-password",
+                  placeholder: "••••••••",
+                  class: "w-full rounded-lg border border-[#e6d6c8] bg-[#f6f1ec] py-3 pl-12 pr-4 text-sm text-[#2e2a26] placeholder-[#9a8f88] focus:border-[#6b3f2b] focus:outline-none focus:ring-1 focus:ring-[#6b3f2b]" %>
+            </div>
+          </div>
+
+          <%# 登録ボタン %>
+          <%= f.submit "登録する",
+              class: "flex w-full items-center justify-center gap-2 rounded-lg bg-[#6b3f2b] py-4 text-base font-bold text-white shadow-[0_4px_12px_rgba(107,63,43,0.3)] transition-all hover:bg-[#5a3524] active:scale-[0.98]" %>
+        <% end %>
+      </div>
+
+      <%# ログイン案内 %>
+      <div class="mt-4 rounded-xl border border-black/10 bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex-1 min-w-0">
+            <h2 class="text-base font-bold text-[#2e2a26]">すでに会員の方</h2>
+            <p class="mt-1 text-xs text-[#9a8f88]">ログインして記録を続ける</p>
+          </div>
+          <%= link_to new_session_path(resource_name), class: "flex-shrink-0 rounded-full border border-[#6b3f2b] bg-white px-4 py-2 text-sm font-bold text-[#6b3f2b] transition-all hover:bg-[#6b3f2b] hover:text-white whitespace-nowrap" do %>
+            ログインへ
+          <% end %>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  function togglePasswordVisibility(button) {
+    const input = button.previousElementSibling;
+    if (input.type === "password") {
+      input.type = "text";
+    } else {
+      input.type = "password";
+    }
+  }
+</script>
