@@ -1,0 +1,12 @@
+<% if resource.errors.any? %>
+  <div id="error_explanation" data-turbo-cache="false">
+    <ul class="space-y-1 mb-4">
+      <% resource.errors.full_messages.each do |message| %>
+        <li class="flex items-center gap-2 text-sm text-red-600">
+          <span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-500"></span>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
