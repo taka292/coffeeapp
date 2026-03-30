@@ -59,6 +59,12 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
+# Preview email in the browser instead of sending it [https://github.com/ryanb/letter_opener]
+gem "letter_opener"
+
+# Web interface for letter_opener [https://github.com/fgrehm/letter_opener_web]
+gem "letter_opener_web"
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
