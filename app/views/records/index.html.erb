@@ -125,9 +125,9 @@
         <span class="text-[10px] font-bold">記録一覧</span>
       <% end %>
       <div class="relative -top-3 flex flex-1 items-center justify-center">
-        <button class="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#6b3f2b] text-2xl text-white shadow-[0_4px_12px_rgba(107,63,43,0.3)]">
+        <%= link_to new_coffee_record_path, class: "flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#6b3f2b] text-2xl text-white shadow-[0_4px_12px_rgba(107,63,43,0.3)]" do %>
           +
-        </button>
+        <% end %>
       </div>
       <div class="flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]">
         <span class="text-lg">📈</span>

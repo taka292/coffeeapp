@@ -6,6 +6,16 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認）"
+      coffee_record:
+        bean_name: "豆の名前"
+        grind_size: "豆の挽き目の粗さ"
+        bean_amount: "豆の量"
+        water_temperature: "水温"
+        water_amount: "水量"
+        brew_memo: "抽出メモ"
+        brew_minute: "抽出時間（分）"
+        brew_second: "抽出時間（秒）"
+        brew_time: "抽出時間"
     errors:
       models:
         user:
