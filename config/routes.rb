@@ -19,5 +19,6 @@ Rails.application.routes.draw do
 
   root "records#index"
   get "records", to: "records#index"
+  resources :coffee_records, only: [:new, :create]
   get "settings", to: "settings#index", as: :settings
 end
