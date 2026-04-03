@@ -1,6 +1,10 @@
 class CoffeeRecordsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @coffee_records = current_user.coffee_records.order(created_at: :desc)
+  end
+
   def new
     @coffee_record = current_user.coffee_records.new
   end
@@ -9,7 +13,7 @@ class CoffeeRecordsController < ApplicationController
     @coffee_record = current_user.coffee_records.new(coffee_record_params)
 
     if @coffee_record.save
-      redirect_to records_path, notice: "抽出記録を保存しました。"
+      redirect_to coffee_records_path, notice: "抽出記録を保存しました。"
     else
       render :new, status: :unprocessable_entity
     end

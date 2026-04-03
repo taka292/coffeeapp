@@ -13,6 +13,11 @@ class CoffeeRecord < ApplicationRecord
   validates :brew_memo, length: { maximum: 2000 }, allow_blank: true
   validates :comment, length: { maximum: 2000 }, allow_blank: true
 
+  def brew_time_mmss
+    t = brew_time.to_i
+    format("%02d:%02d", t / 60, t % 60)
+  end
+
   private
 
   def assign_brew_time_from_parts

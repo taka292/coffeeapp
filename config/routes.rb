@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  root "records#index"
-  get "records", to: "records#index"
-  resources :coffee_records, only: [:new, :create]
+  root "coffee_records#index"
+  get "records", to: redirect("/coffee_records")
+  resources :coffee_records, only: [:index, :new, :create]
   get "settings", to: "settings#index", as: :settings
 end
