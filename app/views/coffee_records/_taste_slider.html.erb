@@ -1,0 +1,42 @@
+<%# locals: (label:, field:, value:, footer_left:, footer_right:) %>
+<div class="mb-7 last:mb-0" data-controller="taste-slider">
+  <div class="mb-3 flex items-center justify-between">
+    <span class="text-sm font-bold text-[#2e2a26]"><%= label %></span>
+  </div>
+  <div class="relative px-3.5">
+    <div class="relative flex h-7 items-center">
+      <div class="absolute inset-x-0 top-1/2 h-2 -translate-y-1/2 rounded bg-[#efebe7]">
+        <div
+          data-taste-slider-target="fill"
+          class="h-full rounded bg-[#6b3f2b] transition-[width] duration-75 ease-out"
+          style="width: 0%"
+        ></div>
+      </div>
+      <input
+        type="range"
+        name="coffee_record[<%= field %>]"
+        min="1"
+        max="10"
+        value="<%= value %>"
+        data-taste-slider-target="range"
+        data-action="input->taste-slider#sync"
+        class="absolute inset-0 z-[1] h-full w-full cursor-pointer opacity-0"
+        aria-valuemin="1"
+        aria-valuemax="10"
+        aria-valuenow="<%= value %>"
+        aria-label="<%= label %>"
+      />
+      <div
+        data-taste-slider-target="thumb"
+        class="pointer-events-none absolute top-1/2 z-[2] flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[2.5px] border-[#6b3f2b] bg-white text-[13px] font-extrabold text-[#6b3f2b] shadow-[0_2px_8px_rgba(107,63,43,0.2)] transition-[left] duration-75 ease-out"
+        style="left: 0%"
+      >
+        <span data-taste-slider-target="valueLabel"><%= value %></span>
+      </div>
+    </div>
+    <div class="mt-2.5 flex justify-between px-0.5 text-[11px] font-semibold text-[#9a8f88]">
+      <span><%= footer_left %></span>
+      <span><%= footer_right %></span>
+    </div>
+  </div>
+</div>

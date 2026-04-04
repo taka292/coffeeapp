@@ -12,6 +12,8 @@ class CoffeeRecord < ApplicationRecord
   validates :water_amount, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :brew_memo, length: { maximum: 2000 }, allow_blank: true
   validates :comment, length: { maximum: 2000 }, allow_blank: true
+  validates :acidity, :bitterness, :sweetness, :body, :off_flavor,
+            numericality: { only_integer: true, in: 1..10 }, allow_nil: true
 
   def brew_time_mmss
     t = brew_time.to_i
