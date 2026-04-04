@@ -1,0 +1,60 @@
+<% content_for :title, "記録一覧" %>
+<% content_for :head do %>
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+<% end %>
+
+<div class="-mt-28 -mx-5 min-h-screen w-screen bg-[#f6f1ec] text-[#2e2a26]">
+  <div class="mx-auto flex min-h-screen w-full max-w-[375px] flex-col">
+    <header class="sticky top-0 z-20 flex items-center justify-between bg-[#f6f1ec] px-5 pt-4 pb-2">
+      <div class="h-11 w-11 shrink-0" aria-hidden="true"></div>
+      <h1 class="text-base font-bold text-[#2e2a26]">記録一覧</h1>
+      <%= link_to settings_path, class: "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#e8e3dd] bg-white text-[#2e2a26] shadow-[0_2px_8px_rgba(0,0,0,0.02)]", aria: { label: "設定" } do %>
+        <iconify-icon icon="lucide:sliders-horizontal" class="text-xl" style="color: #2e2a26"></iconify-icon>
+      <% end %>
+    </header>
+
+    <main class="flex-1 space-y-4 px-5 pt-2 pb-6">
+      <% if @coffee_records.any? %>
+        <%= render partial: "coffee_record", collection: @coffee_records %>
+      <% else %>
+        <div class="rounded-lg border border-black/10 bg-white p-6 text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+          <p class="text-sm font-semibold text-[#6b3f2b]">まだ抽出記録がありません</p>
+          <p class="mt-2 text-xs leading-relaxed text-[#9a8f88]">下の「＋」から抽出条件を登録すると、ここに一覧表示されます。</p>
+          <%= link_to "抽出記録を作成する", new_coffee_record_path, class: "mt-4 inline-block rounded-full bg-[#6b3f2b] px-5 py-2.5 text-xs font-bold text-white shadow-[0_4px_12px_rgba(107,63,43,0.3)]" %>
+        </div>
+      <% end %>
+    </main>
+
+    <nav class="sticky bottom-0 z-20 flex h-16 items-center justify-around border-t border-black/10 bg-white shadow-[0_-4px_12px_rgba(0,0,0,0.02)]">
+      <%= link_to root_path, class: "flex flex-1 flex-col items-center justify-center gap-1" do %>
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#e6d6c8]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-[#6b3f2b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </div>
+        <span class="text-[10px] font-bold text-[#9a8f88]">ホーム</span>
+      <% end %>
+      <%= link_to coffee_records_path, class: "flex flex-1 flex-col items-center justify-center gap-1" do %>
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#e6d6c8]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-[#6b3f2b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        </div>
+        <span class="text-[10px] font-bold text-[#6b3f2b]">記録一覧</span>
+      <% end %>
+      <div class="relative -top-3 flex flex-1 items-center justify-center">
+        <%= link_to new_coffee_record_path, class: "flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#6b3f2b] text-2xl text-white shadow-[0_4px_12px_rgba(107,63,43,0.3)]" do %>
+          +
+        <% end %>
+      </div>
+      <div class="flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]">
+        <span class="text-lg">📈</span>
+        <span class="text-[10px] font-bold">データ</span>
+      </div>
+      <%= link_to settings_path, class: "flex flex-1 flex-col items-center justify-center gap-1 text-[#9a8f88]" do %>
+        <span class="text-lg">👤</span>
+        <span class="text-[10px] font-bold">設定</span>
+      <% end %>
+    </nav>
+  </div>
+</div>

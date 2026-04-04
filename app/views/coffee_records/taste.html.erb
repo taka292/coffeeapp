@@ -1,0 +1,85 @@
+<% content_for :title, "味の記録" %>
+<% content_for :head do %>
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+<% end %>
+<%
+  taste_default = ->(v) { v.presence || 5 }
+  acidity_value = taste_default.call(@coffee_record.acidity)
+  bitterness_value = taste_default.call(@coffee_record.bitterness)
+  sweetness_value = taste_default.call(@coffee_record.sweetness)
+  body_value = taste_default.call(@coffee_record.body)
+  off_flavor_value = taste_default.call(@coffee_record.off_flavor)
+%>
+
+<div class="-mt-28 -mx-5 min-h-screen w-screen bg-[#f6f1ec] font-sans text-[#2e2a26]">
+  <div class="mx-auto flex min-h-screen w-full max-w-[375px] flex-col">
+    <header class="flex shrink-0 items-center justify-between bg-[#f6f1ec] px-5 pt-4 pb-2">
+      <%= link_to coffee_records_path, class: "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#2e2a26] shadow-[0_2px_8px_rgba(0,0,0,0.04)]" do %>
+        <iconify-icon icon="lucide:chevron-left" class="text-xl" style="color: #2e2a26"></iconify-icon>
+      <% end %>
+      <h1 class="text-base font-bold text-[#2e2a26]">味の記録</h1>
+      <div class="h-11 w-11 shrink-0" aria-hidden="true"></div>
+    </header>
+
+    <%= form_with model: @coffee_record, url: coffee_records_taste_create_path, method: :post, class: "flex min-h-0 flex-1 flex-col" do |f| %>
+      <div class="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-5 pt-2 pb-36">
+        <% if @coffee_record.errors.any? %>
+          <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+            <p class="font-semibold">入力内容を確認してください</p>
+            <ul class="mt-1 list-disc pl-5">
+              <% @coffee_record.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="space-y-1">
+          <p class="text-[13px] font-semibold text-[#9a8f88]">抽出条件（このあとまとめて保存）</p>
+          <p class="text-[22px] font-extrabold leading-tight text-[#2e2a26]"><%= @coffee_record.bean_name %></p>
+        </div>
+
+        <section>
+          <div class="mb-3.5 flex items-center justify-between">
+            <h2 class="text-[15px] font-bold text-[#2e2a26]">フレーバー</h2>
+            <span class="text-xs font-semibold text-[#9a8f88]">最大3つ（準備中）</span>
+          </div>
+
+          <div class="rounded-lg border border-dashed border-[#e6d6c8] bg-white/80 px-4 py-8 text-center">
+            <p class="text-sm font-semibold leading-relaxed text-[#9a8f88]">
+              フレーバータグの選択・保存は、今後のリリースで追加予定です。
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="mb-3.5 text-[15px] font-bold text-[#2e2a26]">テイストバランス</h2>
+          <div class="rounded-2xl border border-[#e8e3dd] bg-white px-4 py-6 shadow-[0_4px_24px_rgba(58,49,43,0.04)]">
+            <%= render "taste_slider", label: "酸味", field: :acidity, value: acidity_value, footer_left: "弱い", footer_right: "強い" %>
+            <%= render "taste_slider", label: "苦味", field: :bitterness, value: bitterness_value, footer_left: "弱い", footer_right: "強い" %>
+            <%= render "taste_slider", label: "甘み", field: :sweetness, value: sweetness_value, footer_left: "弱い", footer_right: "強い" %>
+            <%= render "taste_slider", label: "コク", field: :body, value: body_value, footer_left: "弱い", footer_right: "強い" %>
+            <%= render "taste_slider", label: "雑味", field: :off_flavor, value: off_flavor_value, footer_left: "少ない", footer_right: "多い" %>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="mb-3.5 text-[15px] font-bold text-[#2e2a26]">メモ</h2>
+          <div class="rounded-xl border border-[#e8e3dd] bg-white p-4 shadow-[0_2px_8px_rgba(58,49,43,0.02)]">
+            <%= f.label :comment, "味のメモ", class: "sr-only" %>
+            <%= f.text_area :comment, rows: 4, placeholder: "味わいのメモ", class: "min-h-[100px] w-full resize-y rounded-md bg-[#f1e9e2] px-4 py-3.5 text-[15px] leading-relaxed text-[#292929] placeholder:text-[#646464] focus:outline-none focus:ring-2 focus:ring-[#c77a4a]/30" %>
+          </div>
+        </section>
+      </div>
+
+      <div class="pointer-events-none fixed inset-x-0 bottom-0 z-10 flex justify-center bg-gradient-to-t from-[#f6f1ec] from-[78%] to-transparent pb-6 pt-12">
+        <div class="pointer-events-auto w-full max-w-[375px] px-5">
+          <%= f.button type: :submit, class: "flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-[#6b3f2b] text-base font-bold text-white shadow-[0_10px_24px_rgba(107,63,43,0.22)]" do %>
+            記録を保存する
+            <iconify-icon icon="lucide:check" class="text-lg" style="color: #ffffff"></iconify-icon>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -16,6 +16,12 @@ ja:
         brew_minute: "抽出時間（分）"
         brew_second: "抽出時間（秒）"
         brew_time: "抽出時間"
+        acidity: "酸味"
+        bitterness: "苦味"
+        sweetness: "甘み"
+        body: "コク"
+        off_flavor: "雑味"
+        comment: "味のメモ"
     errors:
       models:
         user:
