@@ -66,6 +66,15 @@
             </div>
           </div>
 
+          <%# ログイン状態を保持 %>
+          <%- if devise_mapping.rememberable? %>
+            <div class="mb-4 flex items-center gap-2">
+              <%= f.check_box :remember_me,
+                  class: "h-4 w-4 rounded border-[#e6d6c8] text-[#6b3f2b] focus:ring-[#6b3f2b]" %>
+              <%= f.label :remember_me, "ログイン状態を保持する", class: "text-sm text-[#2e2a26]" %>
+            </div>
+          <% end %>
+
           <%# パスワードを忘れた場合 %>
           <%- if devise_mapping.recoverable? %>
             <div class="mb-6">
