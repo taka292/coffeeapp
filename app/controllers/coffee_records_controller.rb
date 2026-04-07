@@ -1,5 +1,6 @@
 class CoffeeRecordsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_last_coffee_record, only: [:new, :taste]
   before_action :discard_coffee_record_wizard_session, only: [:new, :index]
 
   WIZARD_STEP1_PARAM_KEYS = %i[
@@ -18,7 +19,11 @@ class CoffeeRecordsController < ApplicationController
   end
 
   def new
-    @coffee_record = current_user.coffee_records.new
+    @coffee_record = if @last_coffee_record
+                       current_user.coffee_records.new(brew_attributes_from_record(@last_coffee_record))
+                     else
+                       current_user.coffee_records.new
+                     end
   end
 
   def create
@@ -40,6 +45,7 @@ class CoffeeRecordsController < ApplicationController
     end
 
     @coffee_record = build_coffee_record_from_wizard(wizard)
+    apply_taste_seed_from_last_saved(@coffee_record)
   end
 
   def taste_create
@@ -71,7 +77,35 @@ class CoffeeRecordsController < ApplicationController
   end
 
   def build_coffee_record_from_wizard(wizard_hash)
-      attrs = wizard_hash.stringify_keys.slice(*WIZARD_STEP1_PARAM_KEYS.map(&:to_s))
+    attrs = wizard_hash.stringify_keys.slice(*WIZARD_STEP1_PARAM_KEYS.map(&:to_s))
     current_user.coffee_records.new(attrs)
+  end
+
+  def brew_attributes_from_record(record)
+    {
+      bean_name: record.bean_name,
+      grind_size: record.grind_size,
+      bean_amount: record.bean_amount,
+      water_temperature: record.water_temperature,
+      water_amount: record.water_amount,
+      brew_memo: record.brew_memo,
+      brew_time: record.brew_time
+    }
+  end
+
+  def apply_taste_seed_from_last_saved(record)
+    return if @last_coffee_record.nil?
+
+    last = @last_coffee_record
+    record.acidity = last.acidity if record.acidity.nil?
+    record.bitterness = last.bitterness if record.bitterness.nil?
+    record.sweetness = last.sweetness if record.sweetness.nil?
+    record.body = last.body if record.body.nil?
+    record.off_flavor = last.off_flavor if record.off_flavor.nil?
+    record.comment = last.comment if record.comment.blank?
+  end
+
+  def set_last_coffee_record
+    @last_coffee_record = current_user.coffee_records.recent.first
   end
 end

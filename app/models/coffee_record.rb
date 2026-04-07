@@ -1,6 +1,8 @@
 class CoffeeRecord < ApplicationRecord
   belongs_to :user
 
+  scope :recent, -> { order(created_at: :desc) }
+
   attr_accessor :brew_minute, :brew_second
   before_validation :assign_brew_time_from_parts
 
