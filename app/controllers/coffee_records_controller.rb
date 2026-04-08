@@ -10,8 +10,7 @@ class CoffeeRecordsController < ApplicationController
     water_temperature
     water_amount
     brew_memo
-    brew_minute
-    brew_second
+    brew_time
   ].freeze
 
   def index

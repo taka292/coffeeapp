@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// 抽出記録画面（モック）: 挽き目スライダー・比率表示・抽出時間表示
+// 抽出記録画面: 挽き目スライダー・比率表示・抽出時間（秒入力）
 export default class extends Controller {
   static targets = [
     "grindRange",
@@ -11,8 +11,7 @@ export default class extends Controller {
     "beanAmount",
     "waterAmount",
     "ratioLine",
-    "brewMinute",
-    "brewSecond",
+    "brewTime",
     "brewTimeDisplay",
   ]
 
@@ -62,16 +61,15 @@ export default class extends Controller {
   }
 
   updateBrewTimeDisplay() {
-    let m = parseInt(this.brewMinuteTarget.value, 10)
-    let s = parseInt(this.brewSecondTarget.value, 10)
-    if (Number.isNaN(m)) m = 0
-    if (Number.isNaN(s)) s = 0
-    s = Math.min(59, Math.max(0, s))
-    m = Math.max(0, m)
-    this.brewMinuteTarget.value = m
-    this.brewSecondTarget.value = s
-    const mm = String(m).padStart(2, "0")
-    const ss = String(s).padStart(2, "0")
-    this.brewTimeDisplayTarget.textContent = `${mm}:${ss}`
+    let total = parseInt(this.brewTimeTarget.value, 10)
+    if (Number.isNaN(total)) total = 0
+    total = Math.max(0, total)
+    this.brewTimeTarget.value = total
+    const mm = String(Math.floor(total / 60)).padStart(2, "0")
+    const ss = String(total % 60).padStart(2, "0")
+    const label = `${mm}:${ss}`
+    if (this.hasBrewTimeDisplayTarget) {
+      this.brewTimeDisplayTarget.textContent = label
+    }
   }
 }
