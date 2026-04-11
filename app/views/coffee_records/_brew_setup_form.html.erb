@@ -7,6 +7,7 @@
   brew_time_value = v[:brew_time]
   submit_label = local_assigns.fetch(:submit_label, "味の記録へ進む")
   submit_icon = local_assigns.fetch(:submit_icon, "lucide:arrow-right")
+  step_badge = local_assigns.fetch(:step_badge, "STEP 1 / 2")
 %>
 <div class="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-5 pt-2 pb-36">
   <% if f.object.errors.any? %>
@@ -21,7 +22,7 @@
   <% end %>
 
   <div class="flex flex-col gap-2 pt-1">
-    <p class="text-[13px] font-semibold text-[#646464]">STEP 1 / 2</p>
+    <p class="text-[13px] font-semibold text-[#646464]"><%= step_badge %></p>
   </div>
 
   <section class="flex flex-col gap-3">

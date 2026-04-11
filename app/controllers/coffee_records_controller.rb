@@ -1,7 +1,8 @@
 class CoffeeRecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_last_coffee_record, only: [:new, :taste]
-  before_action :discard_coffee_record_wizard_session, only: [:new, :index]
+  before_action :discard_coffee_record_wizard_session, only: [:new, :index, :edit, :edit_taste, :update_brew, :update_taste]
+  before_action :set_coffee_record, only: %i[edit update_brew edit_taste update_taste destroy]
 
   WIZARD_STEP1_PARAM_KEYS = %i[
     bean_name
@@ -36,6 +37,44 @@ class CoffeeRecordsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update_brew
+    @coffee_record.assign_attributes(coffee_record_params)
+    if @coffee_record.has_changes_to_save?
+      if @coffee_record.save
+        redirect_to edit_taste_coffee_record_path(@coffee_record), notice: "抽出条件を保存しました。"
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    else
+      redirect_to edit_taste_coffee_record_path(@coffee_record)
+    end
+  end
+
+  def edit_taste
+  end
+
+  def update_taste
+    @coffee_record.assign_attributes(taste_params)
+    if @coffee_record.has_changes_to_save?
+      if @coffee_record.save
+        redirect_to coffee_records_path, notice: "味の記録を保存しました。"
+      else
+        render :edit_taste, status: :unprocessable_entity
+      end
+    else
+      redirect_to coffee_records_path,
+                  notice: "編集しました"
+    end
+  end
+
+  def destroy
+    @coffee_record.destroy
+    redirect_to coffee_records_path, notice: "記録を削除しました。"
+  end
+
   def taste
     wizard = session[:coffee_record_wizard]
     unless wizard.present?
@@ -66,6 +105,10 @@ class CoffeeRecordsController < ApplicationController
   end
 
   private
+
+  def set_coffee_record
+    @coffee_record = current_user.coffee_records.find(params[:id])
+  end
 
   def coffee_record_params
     params.require(:coffee_record).permit(*WIZARD_STEP1_PARAM_KEYS)

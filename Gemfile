@@ -68,6 +68,8 @@ gem "letter_opener_web"
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do

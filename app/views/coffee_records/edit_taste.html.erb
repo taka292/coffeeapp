@@ -6,14 +6,14 @@
 <div class="-mt-28 -mx-5 min-h-screen w-screen bg-[#f6f1ec] font-sans text-[#2e2a26]">
   <div class="mx-auto flex min-h-screen w-full max-w-[375px] flex-col">
     <header class="flex shrink-0 items-center justify-between bg-[#f6f1ec] px-5 pt-4 pb-2">
-      <%= link_to coffee_records_path, class: "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#2e2a26] shadow-[0_2px_8px_rgba(0,0,0,0.04)]" do %>
+      <%= link_to edit_coffee_record_path(@coffee_record), class: "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#2e2a26] shadow-[0_2px_8px_rgba(0,0,0,0.04)]", aria: { label: "抽出条件に戻る" } do %>
         <iconify-icon icon="lucide:chevron-left" class="text-xl" style="color: #2e2a26"></iconify-icon>
       <% end %>
       <h1 class="text-base font-bold text-[#2e2a26]">味の記録</h1>
       <div class="h-11 w-11 shrink-0" aria-hidden="true"></div>
     </header>
 
-    <%= form_with model: @coffee_record, url: coffee_records_taste_create_path, method: :post, class: "flex min-h-0 flex-1 flex-col" do |f| %>
+    <%= form_with model: @coffee_record, url: update_taste_coffee_record_path(@coffee_record), method: :patch, class: "flex min-h-0 flex-1 flex-col" do |f| %>
       <div class="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-5 pt-2 pb-36">
         <%= render "taste_fields", f: f %>
       </div>
@@ -21,7 +21,7 @@
       <div class="pointer-events-none fixed inset-x-0 bottom-0 z-10 flex justify-center bg-gradient-to-t from-[#f6f1ec] from-[78%] to-transparent pb-6 pt-12">
         <div class="pointer-events-auto w-full max-w-[375px] px-5">
           <%= f.button type: :submit, class: "flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-[#6b3f2b] text-base font-bold text-white shadow-[0_10px_24px_rgba(107,63,43,0.22)]" do %>
-            記録を保存する
+            記録を更新する
             <iconify-icon icon="lucide:check" class="text-lg" style="color: #ffffff"></iconify-icon>
           <% end %>
         </div>
