@@ -21,6 +21,12 @@ Rails.application.routes.draw do
   get "records", to: redirect("/coffee_records")
   get "coffee_records/taste", to: "coffee_records#taste", as: :coffee_records_taste
   post "coffee_records/taste", to: "coffee_records#taste_create", as: :coffee_records_taste_create
-  resources :coffee_records, only: [:index, :new, :create]
+  resources :coffee_records, only: [:index, :new, :create, :edit, :destroy] do
+    member do
+      patch :update_brew, path: "brew"
+      get :edit_taste
+      patch :update_taste, path: "taste"
+    end
+  end
   get "settings", to: "settings#index", as: :settings
 end
