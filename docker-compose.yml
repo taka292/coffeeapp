@@ -13,7 +13,9 @@ services:
       - "5432:5432"
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     command: bash -c "rm -f tmp/pids/server.pid && bin/dev"
     volumes:
       - .:/rails
@@ -24,6 +26,8 @@ services:
       - db
     environment:
       BUNDLE_DEPLOYMENT: "0"
+      # Dockerfile sets BUNDLE_WITHOUT=development; clear it so dev gems (e.g. better_errors) install and load.
+      BUNDLE_WITHOUT: ""
       DATABASE_URL: postgres://postgres:postgres@db:5432/coffeeapp_development
       RAILS_ENV: development
       MAILER_SENDER: ${MAILER_SENDER}
